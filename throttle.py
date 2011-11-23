@@ -22,7 +22,7 @@ def write_one_timeslice(readfile, writefile, bytes_to_send, old_leftover_data):
         chunk = bytes_to_send-bytes_sent
         if chunk >= data_len:
             data_to_write = data
-            new_leftover_data = (False, None)
+            new_leftover_data = None
         else:
             data_to_write = data[:chunk]
             new_leftover_data = data[chunk:]
