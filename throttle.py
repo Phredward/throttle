@@ -12,8 +12,8 @@ def write_one_timeslice(readfile, writefile, bytes_to_send, old_leftover_data):
     if old_leftover_data:
         data_to_write = old_leftover_data[:bytes_to_send]
         new_leftover_data = old_leftover_data[bytes_to_send:]
-        writefile.write(data_to_write)
         bytes_sent = len(data_to_write)
+        writefile.write(data_to_write)
     while bytes_sent < bytes_to_send:
         data = readfile.read(BLOCK_READ_SIZE)
         data_len = len(data)
@@ -40,9 +40,9 @@ def main():
     super_start_time = start_time
     bytes_this_chunk = 0
     is_done = False
-    old_leftover_data = None
+    leftover_data = None
     while not is_done:
-        is_done, leftover_data = write_one_timeslice(sys.stdin, sys.stdout, bytes_per_chunk, old_leftover_data)
+        is_done, leftover_data = write_one_timeslice(sys.stdin, sys.stdout, bytes_per_chunk, leftover_data)
         #ok, we've written the right amount of data for our timeslice, now how much time has passed?
         cur_time = time.time()
         time_so_far = cur_time - start_time
