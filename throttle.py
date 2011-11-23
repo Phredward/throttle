@@ -47,10 +47,10 @@ def main():
         cur_time = time.time()
         time_so_far = cur_time - start_time
         if time_so_far >= 0.01:
-            #print >> sys.stderr, "more", time_so_far
+            #print >> sys.stderr, "more %0.6f" % time_so_far
             pass
         else:
-            #print >> sys.stderr, "less", time_so_far
+            #print >> sys.stderr, "less %0.6f" % time_so_far
             time.sleep(0.01 - time_so_far)
         #start_time = cur_time + 0.01 - time_so_far #works even if we go over.
         start_time = start_time + 0.01 #what we really want
