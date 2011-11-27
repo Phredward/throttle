@@ -58,7 +58,7 @@ def main():
         while remainder_this_chunk >= 100:
             bytes_this_chunk += 1
             remainder_this_chunk -= 100
-        is_done, leftover_data = write_one_timeslice(sys.stdin, sys.stdout, bytes_this_chunk, leftover_data, options.block_size)
+        is_done, leftover_data = write_one_timeslice(options.input_file, options.output_file, bytes_this_chunk, leftover_data, options.block_size)
         #ok, we've written the right amount of data for our timeslice, now how much time has passed?
         cur_time = time.time()
         time_so_far = cur_time - start_time
