@@ -7,7 +7,6 @@ import time
 DEFAULT_BLOCK_SIZE = 1024 #larger size = less cpu usage
 DEFAULT_BW = 1048576 #1MB/s default
 
-
 def write_one_timeslice(readfile, writefile, bytes_to_send, old_leftover_data, block_size):
     bytes_sent = 0
     new_leftover_data = None
@@ -32,7 +31,6 @@ def write_one_timeslice(readfile, writefile, bytes_to_send, old_leftover_data, b
         writefile.write(data_to_write)
         bytes_sent += data_len
     return (False, new_leftover_data)
-
 
 def init_options():
     global options, args
@@ -63,15 +61,10 @@ def main():
         cur_time = time.time()
         time_so_far = cur_time - start_time
         if time_so_far >= 0.01:
-            #print >> sys.stderr, "more %0.6f" % time_so_far
             pass
         else:
-            #print >> sys.stderr, "less %0.6f" % time_so_far
             time.sleep(0.01 - time_so_far)
-        #start_time = cur_time + 0.01 - time_so_far #works even if we go over.
         start_time = start_time + 0.01 #what we really want
-
-    print >> sys.stderr, 'done?'
 
 
 if __name__ == '__main__':
