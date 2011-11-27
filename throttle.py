@@ -40,7 +40,7 @@ def init_options():
     parser.add_option("--bandwidth", default=DEFAULT_BW, type="int", help="Bytes / second to rate limit to")
     parser.add_option("--block-size", default=DEFAULT_BLOCK_SIZE, type="int", help="bytes to read at a time (1K default).  Bigger may mean less cpu usage, especially for high bandwidth, low latency throttlings.  Try 65536 if you want to bump this up.")
     parser.add_option("--input-file", default=sys.stdin, type="string", help="file to read from (default stdin)")
-    parser.add_option("--output-file", default=sys.stdin, type="string", help="file to write to (default stdout)")
+    parser.add_option("--output-file", default=sys.stdout, type="string", help="file to write to (default stdout)")
     options, args = parser.parse_args()
 
 def main():
