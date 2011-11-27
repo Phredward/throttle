@@ -46,15 +46,19 @@ def init_options():
 def main():
     init_options()
     total = 0
-    #speed = 1048576
-    bytes_per_chunk = 104857
+    bytes_per_chunk, remainder_per_chunk = divmod(options.bandwidth, 100)
     start_time = time.time()
     super_start_time = start_time
-    bytes_this_chunk = 0
     is_done = False
     leftover_data = None
+    remainder_this_chunk = 0
     while not is_done:
-        is_done, leftover_data = write_one_timeslice(sys.stdin, sys.stdout, bytes_per_chunk, leftover_data, options.block_size)
+        bytes_this_chunk = bytes_per_chunk
+        remainder_this_chunk += remainder_per_chunk
+        while remainder_this_chunk >= 100:
+            bytes_this_chunk += 1
+            remainder_this_chunk -= 100
+        is_done, leftover_data = write_one_timeslice(sys.stdin, sys.stdout, bytes_this_chunk, leftover_data, options.block_size)
         #ok, we've written the right amount of data for our timeslice, now how much time has passed?
         cur_time = time.time()
         time_so_far = cur_time - start_time
